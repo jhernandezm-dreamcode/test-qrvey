@@ -1,0 +1,41 @@
+{
+  "name": "test-qrvey",
+  "version": "1.0.0",
+  "description": "This project conatins the backend code for an serverless aplication",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest --verbose --coverage --detectOpenHandles"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhernandezm-dreamcode/test-qrvey.git"
+  },
+  "author": "Jorge Hernandez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jhernandezm-dreamcode/test-qrvey/issues"
+  },
+  "homepage": "https://github.com/jhernandezm-dreamcode/test-qrvey#readme",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.77",
+    "@types/jest": "^26.0.23",
+    "aws-sdk-mock": "^5.1.0",
+    "jest": "^27.0.4",
+    "ts-jest": "^27.0.3",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.926.0"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testTimeout": 100000,
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
+    ]
+  }
+}
