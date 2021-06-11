@@ -6,7 +6,6 @@ AWS.config.update({ region: "us-east-1" });
  * @description This is the generic class for any CRUD operation in any class/model
  */
 class CommonDB {
-
   /**
    * @name putRecord
    * @description generic method for insert a register in dynamo
@@ -25,20 +24,16 @@ class CommonDB {
       ReturnValues: "ALL_OLD",
     };
     let data: any;
-    try {
-      data = await docClient.put(params).promise();
-      return data;
-    } catch (err) {
-      console.error("Error", err);
-      return err;
-    }
+
+    data = await docClient.put(params).promise();
+    return data;
   }
 
   /**
    * @name getRecord
    * @description method for get a register
-   * @param tableName 
-   * @param id 
+   * @param tableName
+   * @param id
    * @returns {Object}
    */
   public async getRecord<T>(
@@ -60,8 +55,8 @@ class CommonDB {
   /**
    * @name deleteRecord
    * @description Method for delete a register
-   * @param tableName 
-   * @param id 
+   * @param tableName
+   * @param id
    * @returns {Object}
    */
   public async deleteRecord(tableName: string, id: any) {
@@ -75,19 +70,15 @@ class CommonDB {
     };
 
     let data: any;
-    try {
-      data = await docClient.delete(params).promise();
-      return data;
-    } catch (err) {
-      console.error("Error", err);
-      return err;
-    }
+
+    data = await docClient.delete(params).promise();
+    return data;
   }
 
   /**
    * @name getAllRecord
    * @description method for get all the registers
-   * @param tableName 
+   * @param tableName
    * @returns {Object}
    */
   public async getAllRecord(tableName: string) {
@@ -102,8 +93,8 @@ class CommonDB {
   /**
    * @name updateRecord
    * @description method for update a record
-   * @param updateRecord 
-   * @param tableName 
+   * @param updateRecord
+   * @param tableName
    * @returns {Object}
    */
   public async updateRecord(updateRecord: any, tableName: string) {
