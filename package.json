@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "This project conatins the backend code for an serverless aplication",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "jest --verbose --coverage --detectOpenHandles"
   },
@@ -27,7 +26,9 @@
     "typescript": "^3.3.3"
   },
   "dependencies": {
-    "aws-sdk": "^2.926.0"
+    "aws-sdk": "^2.926.0",
+    "cross-var": "^1.1.0",
+    "dotenv-cli": "^4.0.0"
   },
   "jest": {
     "preset": "ts-jest",
