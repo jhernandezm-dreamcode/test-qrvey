@@ -45,10 +45,9 @@ class Heroes {
   /**
    * @name listHeroes
    * @description method for get all the items
-   * @param body
    * @returns {Object}
    */
-  public async listHeroes(body: any): Promise<any> {
+  public async listHeroes(): Promise<any> {
     let response: any;
     try {
       const listDynamo: any = await commonDB.getAllRecord(

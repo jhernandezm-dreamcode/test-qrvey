@@ -28,7 +28,8 @@
   "dependencies": {
     "aws-sdk": "^2.926.0",
     "cross-var": "^1.1.0",
-    "dotenv-cli": "^4.0.0"
+    "dotenv-cli": "^4.0.0",
+    "uuidv4": "^6.2.10"
   },
   "jest": {
     "preset": "ts-jest",
