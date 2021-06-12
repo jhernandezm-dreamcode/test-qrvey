@@ -38,7 +38,6 @@ class Heroes {
         null
       );
     }
-    console.log("response",response)
     return response;
   }
 

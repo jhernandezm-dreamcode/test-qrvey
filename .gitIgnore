@@ -2,3 +2,4 @@ node_modules
 dist/
 database/dynamo_db-pack.yaml
 qrvey-pack.yaml
+coverage
