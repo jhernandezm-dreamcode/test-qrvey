@@ -21,13 +21,10 @@ class Heroes {
   public async insertHeroe(body: any): Promise<any> {
     let response: any;
     try {
-      console.log("body2,",body)
-      console.log("dbname",DBConfigurations.tableHeroesName)
       const insertDynamo: any = await commonDB.putRecord(
         DBConfigurations.tableHeroesName,
         body
       );
-      console.log("insert dyanmooo----", insertDynamo);
       response = await genericFunctions.setResponse(
         CODES.SUCCESS,
         STATUS_DESCRIPTION.SUCCESS,
@@ -82,11 +79,14 @@ class Heroes {
   public async getHeroe(id: string): Promise<any> {
     let response: any;
     try {
-      const getItem: any = await commonDB.getRecord(
+      let getItem: any = await commonDB.getRecord(
         DBConfigurations.tableHeroesName,
         id
       );
       console.log("get item--", getItem);
+      if(getItem==undefined){
+        getItem = "Does not exist information for this user"
+      }
       response = await genericFunctions.setResponse(
         CODES.SUCCESS,
         STATUS_DESCRIPTION.SUCCESS,
