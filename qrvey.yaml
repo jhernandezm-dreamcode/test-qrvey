@@ -48,7 +48,7 @@ Resources:
         Properties:
             CodeUri: dist/
             Description: 'Create a Hero in a database'
-            Handler: functions/crudHeroesHandler.createHero
+            Handler: src/functions/crudHeroesHandler.createHeroe
             Role: !GetAtt QrveyLambdaBackendIAMRole.Arn
             Runtime: nodejs12.x
             Timeout: 10
@@ -65,7 +65,7 @@ Resources:
         Properties:
             CodeUri: dist/
             Description: 'Get a hero from a table'
-            Handler: functions/crudHeroesHandler.getHeroe
+            Handler: src/functions/crudHeroesHandler.getHeroe
             Role: !GetAtt QrveyLambdaBackendIAMRole.Arn
             Runtime: nodejs12.x
             Timeout: 10
@@ -82,7 +82,7 @@ Resources:
         Properties:
             CodeUri: dist/
             Description: 'Delete a hero in the database'
-            Handler: functions/crudHeroesHandler.deleteHeroe
+            Handler: src/functions/crudHeroesHandler.deleteHeroe
             Role: !GetAtt QrveyLambdaBackendIAMRole.Arn
             Runtime: nodejs12.x
             Timeout: 10
@@ -99,7 +99,7 @@ Resources:
         Properties:
             CodeUri: dist/
             Description: 'Update a hero in the database'
-            Handler: functions/crudHeroesHandler.updateHeroe
+            Handler: src/functions/crudHeroesHandler.updateHeroe
             Role: !GetAtt QrveyLambdaBackendIAMRole.Arn
             Runtime: nodejs12.x
             Timeout: 10
@@ -116,7 +116,7 @@ Resources:
         Properties:
             CodeUri: dist/
             Description: 'Get all the heros'
-            Handler: functions/crudHeroesHandler.listHeroes
+            Handler: src/functions/crudHeroesHandler.listHeroes
             Role: !GetAtt QrveyLambdaBackendIAMRole.Arn
             Runtime: nodejs12.x
             Timeout: 10

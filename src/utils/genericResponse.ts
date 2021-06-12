@@ -14,15 +14,14 @@ class GenericFunctions {
    * @returns {Object}
    */
   public async setResponse(code: number, status: string, body: any): Promise<any> {
-    let response: any = {
-      Headers,
-    };
+    let response: any = {};
     let bodyResponse: any = JSON.stringify({
       code: code,
       status: status,
       body: body,
     });
     response.body = bodyResponse;
+    response.headers = Headers;
     return response;
   }
 }

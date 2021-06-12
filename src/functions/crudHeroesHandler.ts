@@ -1,5 +1,5 @@
 import heroes from "../controllers/heroes/heroes";
-import { uuid } from "uuidv4";
+import { v4 as uuid_v4 } from "uuid";
 
 /**
  * @name createHeroe
@@ -9,7 +9,7 @@ import { uuid } from "uuidv4";
  */
 export async function createHeroe(event: any): Promise<any> {
   let body = JSON.parse(event.body);
-  body.id = uuid();
+  body.id = uuid_v4();
   console.log("body create--", body);
   let response: any = await heroes.insertHeroe(body);
   return response;
