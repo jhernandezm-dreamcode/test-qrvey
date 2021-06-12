@@ -63,7 +63,7 @@ describe("crud heroes", () => {
     insertOneOperation.mockRestore();
   });
 
-  it("Error get undefines", async () => {
+  it("Error get undefine", async () => {
     let insertOne: any = undefined;
     let insertOneOperation: any = jest
       .spyOn(commonDB, "getRecord")
@@ -72,5 +72,30 @@ describe("crud heroes", () => {
     expect(response.body).toBeTruthy();
     insertOneOperation.mockRestore();
   });
+
+  it("success update", async () => {
+    let createRequest: any = RequestHeroes.createHero;
+    let insertOne: any = DynamoResponses.insertSuccess;
+    let insertOneOperation: any = jest
+      .spyOn(commonDB, "updateRecord")
+      .mockReturnValueOnce(insertOne);
+    let response: any = await heroes.updateHeroes(createRequest);
+    expect(response.body).toBeTruthy();
+    insertOneOperation.mockRestore();
+  });
+
+  it("Error update", async () => {
+    let createRequest: any = RequestHeroes.createHero;
+    let insertOne: any = DynamoResponses.insertSuccess;
+    let insertOneOperation: any = jest
+      .spyOn(commonDB, "updateRecord")
+      .mockImplementation(() => {
+        throw new Error();
+      });;
+    let response: any = await heroes.updateHeroes(createRequest);
+    expect(response.body).toBeTruthy();
+    insertOneOperation.mockRestore();
+  });
+
 
 });
