@@ -19,4 +19,21 @@ describe("crud heroes", ()=>{
         let response:any = await heroes.insertHeroe(createRequest); 
         expect(response.body).toBeTruthy();
     })
+
+    it("success List",async()=>{
+        let insertOne:any = DynamoResponses.insertSuccess;
+        let insertOneOperation:any = jest.spyOn(commonDB,"getAllRecord").mockReturnValueOnce(insertOne);
+        let response:any = await heroes.listHeroes(); 
+        expect(response.body).toBeTruthy();
+        insertOneOperation.mockRestore();
+    })
+
+    it("Bad List",async()=>{
+        let insertOneOperation:any = jest.spyOn(commonDB,"getAllRecord").mockImplementation(() => {
+            throw new Error();
+          });
+        let response:any = await heroes.listHeroes(); 
+        expect(response.body).toBeTruthy();
+        insertOneOperation.mockRestore();
+    })
 })
