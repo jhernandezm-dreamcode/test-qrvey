@@ -4,7 +4,15 @@
   "description": "This project conatins the backend code for an serverless aplication",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose --coverage --detectOpenHandles"
+    "clean": "rimraf dist",
+    "test": "jest --verbose --coverage --detectOpenHandles",
+    "createBucket": "aws s3api create-bucket --bucket %QRVEY_BUCKET_NAME% --region us-east-1",
+    "packDB": "dotenv cross-var cd database/ && npm run-script build && sam package --s3-bucket %QRVEY_BUCKET_NAME% --template-file dynamo_db.yaml --output-template-file dynamo_db-pack.yaml",
+    "deplDB": "dotenv cross-var cd database/ && sam deploy --template-file dynamo_db-pack.yaml --stack-name %STACK_DB_NAME% --region us-east-1 --capabilities CAPABILITY_NAMED_IAM",
+    "pack": "dotenv cross-var npm run-script build && sam package --s3-bucket %QRVEY_BUCKET_NAME% --template-file qrvey.yaml --output-template-file qrvey-pack.yaml",
+    "depl": "dotenv cross-var sam deploy --template-file  qrvey-pack.yaml --s3-bucket %QRVEY_BUCKET_NAME% --stack-name %STACK_NAME_BASE% --region us-east-1 --capabilities CAPABILITY_NAMED_IAM --no-fail-on-empty-changeset",
+    "postbuild": "(cp package.json dist/package.json && cd dist && npm install --only=production)",
+    "build": "npm run clean && tsc -p ."
   },
   "repository": {
     "type": "git",

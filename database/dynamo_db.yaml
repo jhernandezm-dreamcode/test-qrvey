@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Dynamo backend serverless application Accounts Domain
+Resources:
+
+  HeroesTable: 
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "${AWS::StackName}-heroes-table"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        -
+          AttributeName: id
+          AttributeType: S  
+
+      KeySchema:
+        -
+          KeyType: HASH
+          AttributeName: id
+        
+Outputs:
+  HeroesTableArn:
+    Description: "Heroes Table Arn"
+    Value: !GetAtt HeroesTable.Arn
+    Export:
+      Name: !Sub "${AWS::StackName}-HeroesTableArn"

@@ -1,0 +1,129 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: backend for qrvey test
+        
+Resources:
+    QrveyLambdaBackendIAMRole:     
+        Type: AWS::IAM::Role
+        Properties:
+            RoleName: !Sub "${AWS::StackName}-QrveyBackendLambda" 
+            AssumeRolePolicyDocument:
+                Version: '2012-10-17'
+                Statement:
+                    -
+                        Effect: Allow
+                        Principal:
+                            Service:
+                                - 'lambda.amazonaws.com'                             
+                        Action:
+                            - 'sts:AssumeRole'
+            Policies:
+                -
+                    PolicyName: !Sub "${AWS::StackName}-QrveyBackendLambdaIAMPolicy"
+                    PolicyDocument:
+                        Version: '2012-10-17'
+                        Statement:
+                            -
+                                Effect: Allow
+                                Action:
+                                    - logs:*
+                                    - dynamodb:*
+                                    - autoscaling:CompleteLifecycleAction
+                                    - lambda:*
+                                    - s3:*                
+                                Resource: "*"                                                                                
+    
+    ApiGateway:
+        Type: "AWS::Serverless::Api"
+        Properties:
+            Name: !Sub "${AWS::StackName}"
+            StageName: Develop
+            Variables:
+                ApiGateway: !Ref ApiGateway
+                region: !Ref AWS::Region
+
+
+    CreateHero:
+        Type: 'AWS::Serverless::Function'
+        Properties:
+            CodeUri: dist/
+            Description: 'Create a Hero in a database'
+            Handler: functions/crudHeroesHandler.createHeroe
+            Role: !GetAtt QrveyLambdaBackendIAMRole.Arn
+            Runtime: nodejs12.x
+            Timeout: 10
+            Events:
+                PostDynamoDBEndPointHTTP:
+                    Type: Api
+                    Properties:
+                        Path: /createHero
+                        Method: POST   
+                        RestApiId: !Ref ApiGateway         
+ 
+    GetHero:
+        Type: 'AWS::Serverless::Function'
+        Properties:
+            CodeUri: dist/
+            Description: 'Get a hero from a table'
+            Handler: functions/crudHeroesHandler.getHeroe
+            Role: !GetAtt QrveyLambdaBackendIAMRole.Arn
+            Runtime: nodejs12.x
+            Timeout: 10
+            Events:
+                GetDynamoDBEndPointHTTP:
+                    Type: Api
+                    Properties:
+                        Path: /getHero/{id}
+                        Method: GET   
+                        RestApiId: !Ref ApiGateway         
+          
+    DeleteHero:
+        Type: 'AWS::Serverless::Function'
+        Properties:
+            CodeUri: dist/
+            Description: 'Delete a hero in the database'
+            Handler: functions/crudHeroesHandler.deleteHeroe
+            Role: !GetAtt QrveyLambdaBackendIAMRole.Arn
+            Runtime: nodejs12.x
+            Timeout: 10
+            Events:
+                DeleteDynamoDBEndPointHTTP:
+                    Type: Api
+                    Properties:
+                        Path: /deleteHero/{id}
+                        Method: DELETE   
+                        RestApiId: !Ref ApiGateway         
+                       
+    UpdateHero:
+        Type: 'AWS::Serverless::Function'
+        Properties:
+            CodeUri: dist/
+            Description: 'Update a hero in the database'
+            Handler: functions/crudHeroesHandler.updateHeroe
+            Role: !GetAtt QrveyLambdaBackendIAMRole.Arn
+            Runtime: nodejs12.x
+            Timeout: 10
+            Events:
+                PatchDynamoDBEndPointHTTP:
+                    Type: Api
+                    Properties:
+                        Path: /UpdateHero
+                        Method: PATCH   
+                        RestApiId: !Ref ApiGateway         
+                       
+    ListHeroes:
+        Type: 'AWS::Serverless::Function'
+        Properties:
+            CodeUri: dist/
+            Description: 'Get all the heros'
+            Handler: functions/crudHeroesHandler.listHeroes
+            Role: !GetAtt QrveyLambdaBackendIAMRole.Arn
+            Runtime: nodejs12.x
+            Timeout: 10
+            Events:
+                ListDynamoDBEndPointHTTP:
+                    Type: Api
+                    Properties:
+                        Path: /listHeroes
+                        Method: GET   
+                        RestApiId: !Ref ApiGateway     
