@@ -1,5 +1,7 @@
+import { config as configProject } from '../../package.json';
+
 export const DBConfigurations = {
-  tableHeroesName: process.env.STACK_DB_NAME + "heroes-table",
+  tableHeroesName: configProject.STACK_DB_NAME  + "heroes-table",
 };
 
 export const Headers = {
