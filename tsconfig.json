@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es5",
+    "target": "es6",
     "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "dist",
+    "baseUrl": "./", 
+    "outDir": "./dist",
     "resolveJsonModule": true,
     "typeRoots": ["node_modules/@types", "src/types"],
     "types": ["node","jest","aws-lambda"],
@@ -67,9 +68,9 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
   },
-  "lib": ["es2015"],
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "src"
   ],
   "exclude": [
     "node_modules",

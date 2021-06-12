@@ -48,7 +48,7 @@ Resources:
         Properties:
             CodeUri: dist/
             Description: 'Create a Hero in a database'
-            Handler: functions/crudHeroesHandler.createHeroe
+            Handler: functions/crudHeroesHandler.createHero
             Role: !GetAtt QrveyLambdaBackendIAMRole.Arn
             Runtime: nodejs12.x
             Timeout: 10
