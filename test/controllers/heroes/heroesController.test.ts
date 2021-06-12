@@ -97,5 +97,25 @@ describe("crud heroes", () => {
     insertOneOperation.mockRestore();
   });
 
+  it("success delete", async () => {
+    let insertOne: any = DynamoResponses.insertSuccess;
+    let insertOneOperation: any = jest
+      .spyOn(commonDB, "deleteRecord")
+      .mockReturnValueOnce(insertOne);
+    let response: any = await heroes.deleteHeroe("123");
+    expect(response.body).toBeTruthy();
+    insertOneOperation.mockRestore();
+  });
+
+  it("Error delete", async () => {
+    let insertOneOperation: any = jest
+      .spyOn(commonDB, "deleteRecord")
+      .mockImplementation(() => {
+        throw new Error();
+      });
+    let response: any = await heroes.deleteHeroe("123");
+    expect(response.body).toBeTruthy();
+    insertOneOperation.mockRestore();
+  });
 
 });
