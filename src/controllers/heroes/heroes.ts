@@ -21,6 +21,8 @@ class Heroes {
   public async insertHeroe(body: any): Promise<any> {
     let response: any;
     try {
+      console.log("body2,",body)
+      console.log("dbname",DBConfigurations.tableHeroesName)
       const insertDynamo: any = await commonDB.putRecord(
         DBConfigurations.tableHeroesName,
         body

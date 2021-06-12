@@ -1,5 +1,5 @@
 export const DBConfigurations = {
-  tableHeroesName: process.env.STACK_NAME_BASE + "heroes-table",
+  tableHeroesName: process.env.STACK_DB_NAME + "heroes-table",
 };
 
 export const Headers = {
