@@ -82,7 +82,6 @@ class Heroes {
         DBConfigurations.tableHeroesName,
         id
       );
-      console.log("get item--", getItem);
       if(getItem==undefined){
         getItem = "Does not exist information for this user"
       }
@@ -115,7 +114,6 @@ class Heroes {
         body,
         DBConfigurations.tableHeroesName
       );
-      console.log("update--", update);
       response = await genericFunctions.setResponse(
         CODES.SUCCESS,
         STATUS_DESCRIPTION.SUCCESS,
@@ -145,7 +143,6 @@ class Heroes {
         DBConfigurations.tableHeroesName,
         id
       );
-      console.log("delete--", deleteHeroes);
       response = await genericFunctions.setResponse(
         CODES.SUCCESS,
         STATUS_DESCRIPTION.SUCCESS,
