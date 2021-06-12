@@ -6,11 +6,11 @@
   "scripts": {
     "clean": "rimraf dist",
     "test": "jest --verbose --coverage --detectOpenHandles",
-    "createBucket": "aws s3api create-bucket --bucket %QRVEY_BUCKET_NAME% --region us-east-1",
-    "packDB": "dotenv cross-var cd database/ && npm run-script build && sam package --s3-bucket %QRVEY_BUCKET_NAME% --template-file dynamo_db.yaml --output-template-file dynamo_db-pack.yaml",
-    "deplDB": "dotenv cross-var cd database/ && sam deploy --template-file dynamo_db-pack.yaml --stack-name %STACK_DB_NAME% --region us-east-1 --capabilities CAPABILITY_NAMED_IAM",
-    "pack": "dotenv cross-var npm run-script build && sam package --s3-bucket %QRVEY_BUCKET_NAME% --template-file qrvey.yaml --output-template-file qrvey-pack.yaml",
-    "depl": "dotenv cross-var sam deploy --template-file  qrvey-pack.yaml --s3-bucket %QRVEY_BUCKET_NAME% --stack-name %STACK_NAME_BASE% --region us-east-1 --capabilities CAPABILITY_NAMED_IAM --no-fail-on-empty-changeset",
+    "createBucket": "dotenv -- cross-var aws s3api create-bucket --bucket %QRVEY_BUCKET_NAME% --region us-east-1",
+    "packDB": "cd database/ dotenv -- cross-var  && npm run-script build && sam package --s3-bucket %QRVEY_BUCKET_NAME% --template-file dynamo_db.yaml --output-template-file dynamo_db-pack.yaml",
+    "deplDB": "cd database/ dotenv -- cross-var && sam deploy --template-file dynamo_db-pack.yaml --stack-name %STACK_DB_NAME% --region us-east-1 --capabilities CAPABILITY_NAMED_IAM",
+    "pack": "dotenv -- cross-var npm run-script build && sam package --s3-bucket %QRVEY_BUCKET_NAME% --template-file qrvey.yaml --output-template-file qrvey-pack.yaml",
+    "depl": "dotenv -- cross-var sam deploy --template-file  qrvey-pack.yaml --s3-bucket %QRVEY_BUCKET_NAME% --stack-name %STACK_NAME_BASE% --region us-east-1 --capabilities CAPABILITY_NAMED_IAM --no-fail-on-empty-changeset",
     "postbuild": "(cp package.json dist/package.json && cd dist && npm install --only=production)",
     "build": "npm run clean && tsc -p ."
   },
@@ -31,11 +31,13 @@
     "jest": "^27.0.4",
     "ts-jest": "^27.0.3",
     "tslint": "^5.12.1",
-    "typescript": "^3.3.3"
+    "typescript": "^3.9.9"
   },
   "dependencies": {
+    "@types/node": "^15.12.2",
     "aws-sdk": "^2.926.0",
     "cross-var": "^1.1.0",
+    "dotenv": "^10.0.0",
     "dotenv-cli": "^4.0.0",
     "uuidv4": "^6.2.10"
   },
