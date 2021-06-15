@@ -16,7 +16,7 @@ class S3Controller {
    */
   public async uploadFile(data: any, type: string): Promise<any> {
     let s3 = new AWS.S3();
-    let contentType = this.getContenType(type);
+    let contentType = await this.getContenType(type);
     const bucketParamsCsv = {
       Bucket: BucketConfigurations.nameBucket,
       Key: "files/" + uuid_v4() + "." + type,
@@ -26,7 +26,9 @@ class S3Controller {
       ContentType: contentType,
       ContentDisposition: "inline",
     };
+    console.log("params--",bucketParamsCsv);
     let dataCsv = await s3.upload(bucketParamsCsv).promise();
+    console.log("datacsv",dataCsv)
     return dataCsv.Location;
   }
 
@@ -36,7 +38,7 @@ class S3Controller {
    * @param extension 
    * @returns String with the content type
    */
-  private getContenType(extension: string){
+  private async getContenType(extension: string){
     let contentTypeMap: Map<string, string> = new Map();
     contentTypeMap.set("",Errors.NOT_EXIST_ESTENSION);
     contentTypeMap.set(ExtensionFiles.CSV,"application/csv");

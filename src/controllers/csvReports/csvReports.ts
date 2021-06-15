@@ -20,15 +20,18 @@ class CsvReports {
    */
   public async generateHeroesCSVReport(): Promise<any> {
     let body: any = {};
-    let response: any = {};
+    let response: any = await genericFunctions.setResponse(CODES.SUCCESS,STATUS_DESCRIPTION.SUCCESS,null);
     try {
       const allData: any = await heroes.listHeroes();
-      if (allData.body != null && allData.length > 0) {
-        const csv = await json2csv.json2csvAsync(allData.body);
+      let dataJson = JSON.parse(allData.body)
+      console.log("data json", dataJson)
+      if (dataJson.body != null && dataJson.body.length > 0) {
+        const csv = await json2csv.json2csvAsync(dataJson.body);
         let url: string = await s3Controller.uploadFile(
           csv,
           ExtensionFiles.CSV
         );
+        console.log("url",url)
         if (url) {
           body = { url: url };
           response = await genericFunctions.setResponse(
@@ -45,6 +48,7 @@ class CsvReports {
         }
       }
     } catch (error) {
+      console.log("error",error)
       response = await genericFunctions.setResponse(
         CODES.SERVER_ERROR,
         STATUS_DESCRIPTION.ERROR,

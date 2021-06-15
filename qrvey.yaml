@@ -126,4 +126,21 @@ Resources:
                     Properties:
                         Path: /listHeroes
                         Method: GET   
-                        RestApiId: !Ref ApiGateway     
+                        RestApiId: !Ref ApiGateway
+
+    CreateReportHeroesCsv:
+        Type: 'AWS::Serverless::Function'
+        Properties:
+            CodeUri: dist/
+            Description: 'Get all the heros for create a csv report'
+            Handler: src/functions/csvReportHandler.csvHeroesReport
+            Role: !GetAtt QrveyLambdaBackendIAMRole.Arn
+            Runtime: nodejs12.x
+            Timeout: 10
+            Events:
+                ReportCsvEndPointHTTP:
+                    Type: Api
+                    Properties:
+                        Path: /csvReport
+                        Method: GET   
+                        RestApiId: !Ref ApiGateway  
