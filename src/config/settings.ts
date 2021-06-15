@@ -12,6 +12,15 @@ export const Headers = {
     "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
 };
 
+export const BucketConfigurations = {
+  nameBucket: configProject.QRVEY_BUCKET_NAME
+}
+
+export const ExtensionFiles = {
+  CSV:"csv",
+  PDF:"pdf"
+}
+
 export const CODES = {
     SUCCESS: 200,
     CLIENT_ERROR: 400,
@@ -21,4 +30,8 @@ export const CODES = {
 export const STATUS_DESCRIPTION = {
     SUCCESS:"SUCCESS",
     ERROR: "ERROR"
+}
+
+export const Errors = {
+  NOT_EXIST_ESTENSION:"THE EXTENSION DOES NOT EXISTS"
 }
