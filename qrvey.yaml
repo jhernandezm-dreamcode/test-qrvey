@@ -143,4 +143,21 @@ Resources:
                     Properties:
                         Path: /csvReport
                         Method: GET   
-                        RestApiId: !Ref ApiGateway  
+                        RestApiId: !Ref ApiGateway 
+
+    CreateReportHeroesPdf:
+        Type: 'AWS::Serverless::Function'
+        Properties:
+            CodeUri: dist/
+            Description: 'Get all the heros for create a pdf report'
+            Handler: src/functions/pdfReportHandler.pdfHeroesReports
+            Role: !GetAtt QrveyLambdaBackendIAMRole.Arn
+            Runtime: nodejs12.x
+            Timeout: 10
+            Events:
+                ReportPdfEndPointHTTP:
+                    Type: Api
+                    Properties:
+                        Path: /pdfReport
+                        Method: GET   
+                        RestApiId: !Ref ApiGateway 

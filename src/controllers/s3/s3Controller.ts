@@ -26,9 +26,7 @@ class S3Controller {
       ContentType: contentType,
       ContentDisposition: "inline",
     };
-    console.log("params--",bucketParamsCsv);
     let dataCsv = await s3.upload(bucketParamsCsv).promise();
-    console.log("datacsv",dataCsv)
     return dataCsv.Location;
   }
 
