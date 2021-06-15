@@ -19,9 +19,9 @@
     "url": "git+https://github.com/jhernandezm-dreamcode/test-qrvey.git"
   },
   "config": {
-    "STACK_NAME_BASE":"test-qrvey-backend",
-    "STACK_DB_NAME":"test-qrvey-db",
-    "QRVEY_BUCKET_NAME":"qrvet-bucket-backend"
+    "STACK_NAME_BASE": "test-qrvey-backend",
+    "STACK_DB_NAME": "test-qrvey-db",
+    "QRVEY_BUCKET_NAME": "qrvet-bucket-backend"
   },
   "author": "Jorge Hernandez",
   "license": "ISC",
@@ -44,7 +44,9 @@
     "cross-var": "^1.1.0",
     "dotenv": "^10.0.0",
     "dotenv-cli": "^4.0.0",
-    "uuidv4": "^6.2.10"
+    "uuidv4": "^6.2.10",
+    "json-2-csv": "^3.14.0",
+    "jspdf": "^2.3.1"
   },
   "jest": {
     "preset": "ts-jest",
